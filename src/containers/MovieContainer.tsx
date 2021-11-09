@@ -62,10 +62,10 @@ const Movies: React.FC<{}> = () => {
                   <div><b>Artist:</b> {movie['im:artist']['label']}</div>
                   <div><b>Price:</b> {movie['im:price']['label']}</div>
                 </Card.Text>
-                <Button variant="primary">View Trailer</Button>
+                <Button variant="primary">Preview</Button>
               </Card.Body>
               <Card.Footer>
-                <small className="text-muted">Last updated 3 mins ago</small>
+                <small className="text-muted">Category: {movie['category']['attributes']['label']}</small>
               </Card.Footer>
             </Card>
         ))
