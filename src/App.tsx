@@ -1,25 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Col, Container, Row } from 'react-bootstrap';
+import NavContainer from './containers/NavContainer';
+import MovieContainer from './containers/MovieContainer';
+import FooterContainer from './containers/FooterContainer';
+
+// @flow
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container fluid>
+      <NavContainer />
+      <MovieContainer />
+      <FooterContainer show={true} title={'GetFlex 2021 | All rights reserve.'} />
+    </Container>
   );
 }
 
