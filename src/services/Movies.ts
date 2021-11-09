@@ -4,7 +4,9 @@ import { Movie } from '../types/Movie';
 
 export interface Movies {
   feed: Movie[];
-  entry: Movie[];
+  entry: any;
+  author: any;
+  rights: any;
 }
 
 const useGetMovieService = () => {
