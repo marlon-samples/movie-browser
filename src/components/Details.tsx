@@ -1,15 +1,15 @@
 import React, { Component, useState } from "react";
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
-import { PlayerProps } from '../types/PropsType';
+import { DetailProps } from '../types/PropsType';
 
-class Player extends Component<PlayerProps> {
+class Details extends Component<DetailProps> {
   render() {
-    const { open, toggleModal, url } = this.props;
+    const { openDetails, onCloseModalDetails, details } = this.props;
     return (
       <Modal
-        open={open}
-        onClose={toggleModal}
+        open={openDetails}
+        onClose={onCloseModalDetails}
         styles={{
           modal: {
             maxWidth: "unset",
@@ -25,13 +25,14 @@ class Player extends Component<PlayerProps> {
         }}
         center
       >
-       <video controls={true} autoPlay={true}>
-          <source src={url} type="video/x-m4v" />
-       </video>
+       <div style={{padding: '5rem'}}>
+           <h2>Movie Summary</h2>
+           {details}
+       </div>
 
       </Modal>
     );
   }
 }
 
-export default Player;
+export default Details;

@@ -3,6 +3,7 @@ import { Card, Button, Container, CardGroup, Form, FormControl } from 'react-boo
 import useGetMovieService from '../services/Movies';
 import Loader from "react-loader-spinner";
 import Player from "../components/Player";
+import Details from "../components/Details";
 
 const Movies: React.FC<{}> = () => {
   
@@ -10,7 +11,9 @@ const Movies: React.FC<{}> = () => {
   const [filteredData, setFilteredData] = useState(service);
 
   const [open, setOpen] = useState(false);
+  const [openDetails, setOpenDetails] = useState(false);
   const [url, setUrl] = useState('');
+  const [details, setDetails] = useState('');
   const [searchKey, setSearchKey] = useState('');
   
   const handleSearch = (event:any) => {
@@ -23,10 +26,20 @@ const Movies: React.FC<{}> = () => {
     setUrl(_url);
   }
 
+  const onOpenModalDetails = async (_details: string) => {
+    console.log(_details);
+    setOpenDetails(true);
+    setDetails(_details);
+  }
+
   const onCloseModal = () => { 
     setOpen(false); 
   }
-  
+
+  const onCloseModalDetails = () => { 
+    setOpenDetails(false); 
+  }
+
   if (searchKey == '') {    
       return (
         <div style={{textAlign: 'center'}}>
@@ -75,7 +88,7 @@ const Movies: React.FC<{}> = () => {
                       <div><b>Price:</b> {movie['im:price']['label']}</div>
                     </Card.Text>
                     <Button onClick={() => onOpenModal(movie['link'][1]['attributes']['href'])} style={{margin: '1rem'}} variant="primary">Preview</Button>
-                    <Button style={{margin: '1rem'}} variant="info">Details</Button>
+                    <Button onClick={() => onOpenModalDetails(movie['summary']['label'])} style={{margin: '1rem'}} variant="info">Details</Button>
                   </Card.Body>
                   <Card.Footer>
                     <small className="text-muted">Category: {movie['category']['attributes']['label']}</small>
@@ -87,6 +100,7 @@ const Movies: React.FC<{}> = () => {
             <div style={{textAlign: 'center'}}>Error, the backend moved to the dark side.</div>
           )}
           <Player open={open} toggleModal={onCloseModal} url={url} />
+          <Details openDetails={openDetails} onCloseModalDetails={onCloseModalDetails} details={details} />
         </div>
       );
     }
@@ -138,7 +152,7 @@ const Movies: React.FC<{}> = () => {
                   <div><b>Price:</b> {movie['im:price']['label']}</div>
                 </Card.Text>
                 <Button onClick={() => onOpenModal(movie['link'][1]['attributes']['href'])} style={{margin: '1rem'}} variant="primary">Preview</Button>
-                <Button style={{margin: '1rem'}} variant="info">Details</Button>
+                <Button onClick={() => onOpenModalDetails(movie['summary']['label'])} style={{margin: '1rem'}} variant="info">Details</Button>
               </Card.Body>
               <Card.Footer>
                 <small className="text-muted">Category: {movie['category']['attributes']['label']}</small>
@@ -150,13 +164,10 @@ const Movies: React.FC<{}> = () => {
         <div style={{textAlign: 'center'}}>Error, the backend moved to the dark side.</div>
       )}
       <Player open={open} toggleModal={onCloseModal} url={url} />
+      <Details openDetails={openDetails} onCloseModalDetails={onCloseModalDetails} details={details} />
     </div>
   );
   
 };
 
 export default Movies;
-function data(data: any, any: any) {
-  throw new Error('Function not implemented.');
-}
-
