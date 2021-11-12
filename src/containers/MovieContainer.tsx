@@ -16,7 +16,6 @@ const Movies: React.FC<{}> = () => {
   const handleSearch = (event:any) => {
     let value = event.target.value;
     setSearchKey(value);
-    console.log(searchKey);
   }
 
   const onOpenModal = async (_url: string) => {
@@ -35,7 +34,7 @@ const Movies: React.FC<{}> = () => {
           <Form className="d-flex">
               <FormControl
                 type="search"
-                placeholder="Search"
+                placeholder="Search by Title"
                 className="me-2"
                 aria-label="Search"
                 onChange={(event) => handleSearch(event)}
@@ -127,7 +126,7 @@ const Movies: React.FC<{}> = () => {
               </div>
       }
       {service.status === 'loaded' &&
-        service.payload.entry.filter((movie: any) => movie['im:name']['label'] == searchKey).map((movie:any, index: any) => (
+        service.payload.entry.filter((movie: any) => movie['im:name']['label'].toLocaleLowerCase() == searchKey.toLocaleLowerCase()).map((movie:any, index: any) => (
             <Card key={movie.id.attributes['im:id']} style={{ width: '20%', margin: '2em', display: 'inline-block' }}>
               <Card.Img variant="top" src={movie['im:image'][2]['label']} />
               <Card.Body>
