@@ -25,7 +25,7 @@ const useGetMovieService = () => {
         rights: response.feed.rights }))
       .catch(error => setFeeds({ status: 'error', error }));
   }, []);
-  console.log(feed);
+  //console.log(feed);
   return feed;
 };
 
