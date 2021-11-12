@@ -126,7 +126,7 @@ const Movies: React.FC<{}> = () => {
               </div>
       }
       {service.status === 'loaded' &&
-        service.payload.entry.filter((movie: any) => movie['im:name']['label'].toLocaleLowerCase() == searchKey.toLocaleLowerCase()).map((movie:any, index: any) => (
+        service.payload.entry.filter((movie: any) => { return movie['im:name']['label'].toLowerCase().indexOf(searchKey.toLowerCase()) > -1 } ).map((movie:any, index: any) => (
             <Card key={movie.id.attributes['im:id']} style={{ width: '20%', margin: '2em', display: 'inline-block' }}>
               <Card.Img variant="top" src={movie['im:image'][2]['label']} />
               <Card.Body>
